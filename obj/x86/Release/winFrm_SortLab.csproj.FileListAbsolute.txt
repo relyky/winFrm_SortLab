@@ -1,0 +1,9 @@
+D:\MyPractices\winFrm_SortLab\bin\Release\winFrm_SortLab.exe
+D:\MyPractices\winFrm_SortLab\bin\Release\winFrm_SortLab.pdb
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\ResolveAssemblyReference.cache
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.Form1.resources
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.Properties.Resources.resources
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\GenerateResource.read.1.tlog
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\GenerateResource.write.1.tlog
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.exe
+D:\MyPractices\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.pdb
