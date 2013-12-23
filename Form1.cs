@@ -67,8 +67,8 @@ namespace winFrm_SortLab
         static protected void Swap(int[] datas, int i, int j, Graphics g, Pen pen, Form1 mainForm)
         {
             // before swap
-            g.DrawLine(Pens.LightGray, i, datas[i], i, 0);
-            g.DrawLine(Pens.LightGray, j, datas[j], j, 0);
+            g.DrawLine(Pens.LightGray, i, 99, i, 0);
+            g.DrawLine(Pens.LightGray, j, 99, j, 0);
             //g.DrawRectangle(Pens.LightGray, i, datas[i], 1, 1);
             //g.DrawRectangle(Pens.LightGray, j, datas[j], 1, 1);
 
@@ -106,12 +106,13 @@ namespace winFrm_SortLab
             //由後往前和已排序數列元素比較，直到遇到不大於自己的元素並插入此元素之後；若都沒有則插入在最前面。
             //重複以上動作直到未排序數列全部處理完成。
 
-            int[] sortedDatas = new int[100];
+            int[] sortedDatas = new int[datas.Length];
             for (int i = 0; i < datas.Length; i++)
             {
                 // 取出
                 int c = datas[i];
-                g.DrawRectangle(Pens.LightGray, i, datas[i], 1, 1);
+                g.DrawLine(Pens.LightGray, i, 99, i, 0);
+                //g.DrawRectangle(Pens.LightGray, i, datas[i], 1, 1);
 
                 // 比較
                 int insertIndex = i;
@@ -120,7 +121,7 @@ namespace winFrm_SortLab
                 // 插入-shift
                 for (int j = i; j > insertIndex; j--)
                 {
-                    g.DrawLine(Pens.LightGray, j-1, sortedDatas[j-1], j-1, 0);
+                    g.DrawLine(Pens.LightGray, j-1, 99, j-1, 0);
                     //g.DrawRectangle(Pens.LightGray, j-1, sortedDatas[j-1], 1, 1);
                     sortedDatas[j] = sortedDatas[j - 1]; //
                     g.DrawLine(pen, j, sortedDatas[j], j, 0);
@@ -178,9 +179,6 @@ namespace winFrm_SortLab
                 //# Exchange data[i] and data[max]
                 Swap(datas, i, minIndex, g, pen, mainForm);
             }
-
-            // 
-            //DrawDatas(sortedDatas, g, Pens.Pink);
         }
 
         // 快速排序法
@@ -199,12 +197,6 @@ namespace winFrm_SortLab
                 QuickSort(datas, p, q - 1, g, pen, mainForm);
                 QuickSort(datas, q + 1, r, g, pen, mainForm);
             }
-            
-            // wait a short time
-            //System.Threading.Thread.Sleep((int)mainForm.numSleepTimespan.Value);
-
-            // 
-            //DrawDatas(sortedDatas, g, Pens.Pink);
         }
 
         static protected int QuickSortPartition(int[] datas, int p, int r, Graphics g, Pen pen, Form1 mainForm)
@@ -225,11 +217,11 @@ namespace winFrm_SortLab
                 if (datas[j] <= x)
                 {
                     i++; // i = i + 1;
-                    //Swap(datas, i, j); // exchange A[i]<->A[j]
+                    // exchange A[i]<->A[j]
                     Swap(datas, i, j, g, pen, mainForm);
                 }
 
-            //Swap(datas, i + 1, r); // exchange A[i +1] <-> A[r]
+            // exchange A[i +1] <-> A[r]
             Swap(datas, i+1, r, g, pen, mainForm);
             return i + 1;
         }
