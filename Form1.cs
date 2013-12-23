@@ -11,165 +11,51 @@ namespace winFrm_SortLab
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-
-            //Graphics g = this.CreateGraphics();
-            //Pen myPen = new Pen(Color.Black, 1);
-            //Point sp = new Point(0, 0);//starting point sp
-            //Point ep = new Point(5, 5);//ending point ep
-
-            //g = this.CreateGraphics();//tells compiler that we are going to draw on this very form
-            //g.DrawLine(myPen, sp, ep);
-
-            //g.DrawEllipse(myPen, 20, 30, 90, 30);
-
-            //..................................
-            //// draw 2D dot array
-            //for (int x = 100; x < 520; x += 10)
-            //    for (int y = 100; y < 520; y += 10)
-            //        e.Graphics.DrawRectangle(Pens.Black, x, y, 1,1);
-
-
-            ////# 設定座標系統
-            ////Graphics g = e.Graphics;
-            //Graphics g = panel1.CreateGraphics();
-            //g.TranslateTransform(30, panel1.Height - 30); // 變更原點
-            //g.ScaleTransform(1.0f, -1.0f); // 變更方向
-            //// 
-            //g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
-            //g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
-
-            //// draw dot array
-            //Point[] dots = new Point[100];
-            //for (int i = 0; i < 100; i++)
-            //    dots[i] = new Point( 5 * i, 5 * i);
-
-            //foreach (Point dot in dots)
-            //    g.DrawRectangle(Pens.Blue, dot.X, dot.Y, 1, 1);
-
-            //// 變更座標系統
-            ////g.PageUnit = GraphicsUnit.Pixel;
-            ////g.PageScale = -1;
-            ////g.ScaleTransform(1F, -1F);
-
-            //foreach (Point dot in dots)
-            //    g.DrawRectangle(Pens.Red, dot.X, dot.Y, 1, 1);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //# 設定座標系統
-            //Graphics g = e.Graphics;
-            Graphics g = panel1.CreateGraphics();
-            g.TranslateTransform(30, panel1.Height - 30); // 變更原點
-            g.ScaleTransform(1.0f, -1.0f); // 變更方向
-            // 
-            g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
-            g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
-            //
-            g.ScaleTransform(4.0f, 4.0f); // 放大４倍
-
-            //# init. int array
-            int[] datas = new int[100];
-            for (int i = 0; i < 100; i++)
-                datas[i] = i;
-
-            // randomize
-            Random r = new Random();
-            r.Next(100);
-            for (int i = 0; i < 100; i++)
-            {
-                int i1 = r.Next(100);
-                int i2 = r.Next(100);
-                // swap
-                int tmp = datas[i1];
-                datas[i1] = datas[i2];
-                datas[i2] = tmp;
-            }
-
-            // draw
-            DrawDatas(datas, g, Pens.Blue);
-            // sort -------------------
-            InsertionSort(datas, g, Pens.Blue, this);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //# 設定座標系統
-            //Graphics g = e.Graphics;
-            Graphics g = panel1.CreateGraphics();
-            g.TranslateTransform(30, panel1.Height - 30); // 變更原點
-            g.ScaleTransform(1.0f, -1.0f); // 變更方向
-            // 
-            g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
-            g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
-            //
-            g.ScaleTransform(4.0f, 4.0f); // 放大４倍
-
-            //# init. int array
-            int[] datas = new int[100];
-            for (int i = 0; i < 100; i++)
-                datas[i] = i;
-
-            // randomize
-            Random r = new Random();
-            r.Next(100);
-            for (int i = 0; i < 100; i++)
-            {
-                int i1 = r.Next(100);
-                int i2 = r.Next(100);
-                // swap
-                int tmp = datas[i1];
-                datas[i1] = datas[i2];
-                datas[i2] = tmp;
-            }
-
-            // draw
-            DrawDatas(datas, g, Pens.Blue);
-            // sort -------------------
-            BubbleSort(datas, g, Pens.Aqua, this);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //# 設定座標系統
-            //Graphics g = e.Graphics;
-            Graphics g = panel1.CreateGraphics();
-            g.TranslateTransform(30, panel1.Height - 30); // 變更原點
-            g.ScaleTransform(1.0f, -1.0f); // 變更方向
-            // 
-            g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
-            g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
-            //
-            g.ScaleTransform(4.0f, 4.0f); // 放大４倍
-
-            //# init. int array
-            int[] datas = new int[100];
-            for (int i = 0; i < 100; i++)
-                datas[i] = i;
-
-            // randomize
-            Random r = new Random();
-            r.Next(100);
-            for (int i = 0; i < 100; i++)
-            {
-                int i1 = r.Next(100);
-                int i2 = r.Next(100);
-                // swap
-                int tmp = datas[i1];
-                datas[i1] = datas[i2];
-                datas[i2] = tmp;
-            }
-
-            // draw
-            DrawDatas(datas, g, Pens.Blue);
-            // sort -------------------
-            SelectionSort(datas, g, Pens.Cyan, this);
-        }
-
         #region tools
+
+        /// <summary>
+        /// sub-sequence
+        /// </summary>
+        static protected Graphics SubPreapreSorting(Panel thePanel)
+        {
+            //# 設定座標系統
+            //Graphics g = e.Graphics;
+            Graphics g = thePanel.CreateGraphics();
+            g.TranslateTransform(30, thePanel.Height - 30); // 變更原點
+            g.ScaleTransform(1.0f, -1.0f); // 變更方向
+            // 
+            g.DrawLine(Pens.Black, -30, 0, thePanel.Width, 0);
+            g.DrawLine(Pens.Black, 0, -30, 0, thePanel.Height);
+            //
+            g.ScaleTransform(4.0f, 4.0f); // 放大４倍
+
+            return g;
+        }
+
+        /// <summary>
+        /// sub-sequence
+        /// </summary>
+        static protected int[] InitIntArray(int size)
+        {
+            //# init. int array
+            int[] datas = new int[100];
+            for (int i = 0; i < 100; i++)
+                datas[i] = i; // 0 ~ 99
+
+            // randomize
+            Random r = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                int i1 = r.Next(100);
+                int i2 = r.Next(100);
+                // swap
+                int tmp = datas[i1];
+                datas[i1] = datas[i2];
+                datas[i2] = tmp;
+            }
+
+            return datas;
+        }
 
         // 插入排序法
         static protected void InsertionSort(int[] datas, Graphics g, Pen pen, Form1 mainForm)
@@ -292,9 +178,140 @@ namespace winFrm_SortLab
 
         #endregion
 
-        private void numSleepTimespan_ValueChanged(object sender, EventArgs e)
+        public Form1()
+        {
+            InitializeComponent();
+
+            //Graphics g = this.CreateGraphics();
+            //Pen myPen = new Pen(Color.Black, 1);
+            //Point sp = new Point(0, 0);//starting point sp
+            //Point ep = new Point(5, 5);//ending point ep
+
+            //g = this.CreateGraphics();//tells compiler that we are going to draw on this very form
+            //g.DrawLine(myPen, sp, ep);
+
+            //g.DrawEllipse(myPen, 20, 30, 90, 30);
+
+            //..................................
+            //// draw 2D dot array
+            //for (int x = 100; x < 520; x += 10)
+            //    for (int y = 100; y < 520; y += 10)
+            //        e.Graphics.DrawRectangle(Pens.Black, x, y, 1,1);
+
+
+            ////# 設定座標系統
+            ////Graphics g = e.Graphics;
+            //Graphics g = panel1.CreateGraphics();
+            //g.TranslateTransform(30, panel1.Height - 30); // 變更原點
+            //g.ScaleTransform(1.0f, -1.0f); // 變更方向
+            //// 
+            //g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
+            //g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
+
+            //// draw dot array
+            //Point[] dots = new Point[100];
+            //for (int i = 0; i < 100; i++)
+            //    dots[i] = new Point( 5 * i, 5 * i);
+
+            //foreach (Point dot in dots)
+            //    g.DrawRectangle(Pens.Blue, dot.X, dot.Y, 1, 1);
+
+            //// 變更座標系統
+            ////g.PageUnit = GraphicsUnit.Pixel;
+            ////g.PageScale = -1;
+            ////g.ScaleTransform(1F, -1F);
+
+            //foreach (Point dot in dots)
+            //    g.DrawRectangle(Pens.Red, dot.X, dot.Y, 1, 1);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //# 設定座標系統
+            Graphics g = SubPreapreSorting(panel1);
+
+            //# init. int array
+            int[] datas = InitIntArray(100);
+
+            // draw datas first
+            DrawDatas(datas, g, Pens.Blue);
+
+            // sort -------------------
+            InsertionSort(datas, g, Pens.Blue, this);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //# 設定座標系統
+            Graphics g = SubPreapreSorting(panel1);
+
+            //# init. int array
+            int[] datas = InitIntArray(100);
+
+            // draw datas first
+            DrawDatas(datas, g, Pens.Blue);
+
+            // sort -------------------
+            BubbleSort(datas, g, Pens.Aqua, this);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //# 設定座標系統
+            Graphics g = SubPreapreSorting(panel1);
+
+            //# init. int array
+            int[] datas = InitIntArray(100);
+
+            // draw datas first
+            DrawDatas(datas, g, Pens.Blue);
+
+            // sort -------------------
+            SelectionSort(datas, g, Pens.Cyan, this);
+        }
+
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    //# 設定座標系統
+        //    //Graphics g = e.Graphics;
+        //    Graphics g = panel1.CreateGraphics();
+        //    g.TranslateTransform(30, panel1.Height - 30); // 變更原點
+        //    g.ScaleTransform(1.0f, -1.0f); // 變更方向
+        //    // 
+        //    g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
+        //    g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
+        //    //
+        //    g.ScaleTransform(4.0f, 4.0f); // 放大４倍
+
+        //    //# init. int array
+        //    int[] datas = new int[100];
+        //    for (int i = 0; i < 100; i++)
+        //        datas[i] = i;
+
+        //    // randomize
+        //    Random r = new Random();
+        //    r.Next(100);
+        //    for (int i = 0; i < 100; i++)
+        //    {
+        //        int i1 = r.Next(100);
+        //        int i2 = r.Next(100);
+        //        // swap
+        //        int tmp = datas[i1];
+        //        datas[i1] = datas[i2];
+        //        datas[i2] = tmp;
+        //    }
+
+        //    // draw
+        //    DrawDatas(datas, g, Pens.Blue);
+        //    // sort -------------------
+        //    SelectionSort(datas, g, Pens.Cyan, this);
+        //}
+
+        private void button4_Click(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }
