@@ -6,11 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
+using System.Diagnostics;
 
 namespace winFrm_SortLab
 {
     public partial class Form1 : Form
     {
+        #region drawing resource
+
+        static private Pen _pen = Pens.Cyan;
+        static private Graphics _g = null;
+        static private int _sleepTimespan = 2;
+
+        #endregion
+
         #region tools
 
         /// <summary>
@@ -57,12 +67,12 @@ namespace winFrm_SortLab
             return datas;
         }
 
-        static protected void Swap(int[] datas, int i, int j)
-        {
-            int tmp = datas[i];
-            datas[i] = datas[j];
-            datas[j] = tmp;
-        }
+        //static protected void Swap(int[] datas, int i, int j)
+        //{
+        //    int tmp = datas[i];
+        //    datas[i] = datas[j];
+        //    datas[j] = tmp;
+        //}
 
         static protected void Swap(int[] datas, int i, int j, Graphics g, Pen pen, Form1 mainForm)
         {
@@ -87,16 +97,33 @@ namespace winFrm_SortLab
             System.Threading.Thread.Sleep((int)mainForm.numSleepTimespan.Value);
         }
 
-        static protected void DrawDatas(int[] datas, Graphics g, Pen pen)
+        //static protected void DrawDatas(int[] datas, Graphics g, Pen pen)
+        //{
+        //    //Bitmap bmp = new Bitmap(200, 200, g);
+        //
+        //    // draw
+        //    //g.DrawRectangle(0, 0, 100, 100);
+        //    g.FillRectangle(Brushes.LightGray, 0, 0, 100, 100);
+        //    for (int i = 0; i < 100; i++)
+        //        g.DrawLine(pen, i, datas[i], i, 0);
+        //        //g.DrawRectangle(pen, i, datas[i], 1, 1);               
+        //}
+
+        static protected void DrawDatas(int[] datas, Pen pen)
         {
             //Bitmap bmp = new Bitmap(200, 200, g);
 
             // draw
             //g.DrawRectangle(0, 0, 100, 100);
-            g.FillRectangle(Brushes.LightGray, 0, 0, 100, 100);
+            _g.FillRectangle(Brushes.LightGray, 0, 0, 100, 100);
             for (int i = 0; i < 100; i++)
-                g.DrawLine(pen, i, datas[i], i, 0);
-                //g.DrawRectangle(pen, i, datas[i], 1, 1);               
+                _g.DrawLine(pen, i, datas[i], i, 0);
+            //g.DrawRectangle(pen, i, datas[i], 1, 1);               
+        }
+
+        static protected void DrawDatas(int[] datas)
+        {
+            DrawDatas(datas, _pen);
         }
 
         // 插入排序法
@@ -226,6 +253,116 @@ namespace winFrm_SortLab
             return i + 1;
         }
 
+        // 合併排序法
+        static protected void MergeSort(int[] datas)
+        {
+            #region algorithm
+            //TopDownMergeSort(A[], B[], n)
+            //{
+            //    TopDownSplitMerge(A, 0, n, B);
+            //}
+            #endregion
+
+            int[] mergedDatas = new int[datas.Length];
+            TopDownSplitMerge(datas, 0, datas.Length -1, mergedDatas);
+        }
+
+        static protected void TopDownSplitMerge(int[] datas, int iBegin, int iEnd, int[] mergedDatas)
+        {
+            #region algorithm
+            //TopDownSplitMerge(A[], iBegin, iEnd, B[])
+            //{
+            //    if(iEnd - iBegin < 2)                       // if run size == 1
+            //        return;                                 //   consider it sorted
+            //    // recursively split runs into two halves until run size == 1,
+            //    // then merge them and return back up the call chain
+            //    iMiddle = (iEnd + iBegin) / 2;              // iMiddle = mid point
+            //    TopDownSplitMerge(A, iBegin,  iMiddle, B);  // split / merge left  half
+            //    TopDownSplitMerge(A, iMiddle, iEnd,    B);  // split / merge right half
+            //    TopDownMerge(A, iBegin, iMiddle, iEnd, B);  // merge the two half runs
+            //    CopyArray(B, iBegin, iEnd, A);              // copy the merged runs back to A
+            //}
+            #endregion
+
+            Debug.WriteLine(string.Format("TopDownSplitMerge iBegin ~ iEnd : {0} ~ {1}", iBegin, iEnd));
+
+            if (iEnd <= iBegin) // consider it sorted.
+                return;
+
+            int iMiddle = (iEnd + iBegin) / 2;
+            TopDownSplitMerge(datas, iBegin, iMiddle, mergedDatas); // split / merge left  half
+            TopDownSplitMerge(datas, iMiddle+1, iEnd, mergedDatas); // split / merge right half
+            Merge(datas, iBegin, iMiddle, iEnd, mergedDatas);
+            CopyArray(mergedDatas, iBegin, iEnd, datas); // // copy the merged runs back to A
+        }
+
+        static protected void Merge(int[] A, int iBegin, int iMiddle, int iEnd, int[] B)
+        {
+            #region algorithm
+            //TopDownMerge(A[], iBegin, iMiddle, iEnd, B[])
+            //{
+            //    i0 = iBegin, i1 = iMiddle;
+            // 
+            //    // While there are elements in the left or right runs
+            //    for (j = iBegin; j < iEnd; j++) {
+            //        // If left run head exists and is <= existing right run head.
+            //        if (i0 < iMiddle && (i1 >= iEnd || A[i0] <= A[i1]))
+            //            B[j] = A[i0++];  // Increment i0 after using it as an index.
+            //        else
+            //            B[j] = A[i1++];  // Increment i1 after using it as an index.
+            //    }
+            //}
+            #endregion
+
+            // before 
+            _g.FillRectangle(Brushes.LightGray, iBegin, 0, iEnd - iBegin +1 , 100);
+            _g.DrawLine(Pens.LightGray, 0, -5, 100, -5);
+            _g.DrawLine(Pens.Green, iBegin, -5, iEnd + 1, -5);
+
+            int i0 = iBegin;
+            int i1 = iMiddle+1;
+            int j = iBegin;
+            while(i0 <= iMiddle && i1 <= iEnd)
+            {
+                if (A[i0] <= A[i1])
+                {
+                    _g.DrawLine(Pens.LightGray, i0, -5, i0+1, -5);
+                    _g.DrawLine(_pen, j, A[i0], j, 0);
+                    B[j++] = A[i0++];
+                    Thread.Sleep(_sleepTimespan);
+                }
+                else
+                {
+                    _g.DrawLine(Pens.LightGray, i1, -5, i1+1, -5);
+                    _g.DrawLine(_pen, j, A[i1], j, 0);
+                    B[j++] = A[i1++];
+                    Thread.Sleep(_sleepTimespan);
+                }
+            }
+
+            while (i0 <= iMiddle)
+            {
+                _g.DrawLine(Pens.LightGray, i0, -5, i0+1, -5);
+                _g.DrawLine(_pen, j, A[i0], j, 0);
+                B[j++] = A[i0++];
+                Thread.Sleep(_sleepTimespan);
+            }
+
+            while (i1 <= iEnd)
+            {
+                _g.DrawLine(Pens.LightGray, i1, -5, i1+1, -5);
+                _g.DrawLine(_pen, j, A[i1], j, 0);
+                B[j++] = A[i1++];
+                Thread.Sleep(_sleepTimespan);
+            }
+        }
+
+        static protected void CopyArray(int[] dataFrom, int iBegin, int iEnd, int[] dataTo)
+        {
+            for (int i = iBegin; i <= iEnd; i++)
+                dataTo[i] = dataFrom[i];
+        }
+
         #endregion
 
         public Form1()
@@ -277,62 +414,89 @@ namespace winFrm_SortLab
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //# 設定座標系統
-            Graphics g = SubPreapreSorting(panel1);
+            //# prepare resource
+            _g = SubPreapreSorting(panel1); // 設定座標系統
+            _pen = Pens.Cyan;
+            _sleepTimespan = (int)this.numSleepTimespan.Value;
 
             //# init. int array
             int[] datas = InitIntArray(100);
 
             // draw datas first
-            DrawDatas(datas, g, Pens.Blue);
+            DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            InsertionSort(datas, g, Pens.Cyan, this);
+            InsertionSort(datas, _g, Pens.Cyan, this);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //# 設定座標系統
-            Graphics g = SubPreapreSorting(panel1);
+            //# prepare resource
+            _g = SubPreapreSorting(panel1); // 設定座標系統
+            _pen = Pens.Cyan;
+            _sleepTimespan = (int)this.numSleepTimespan.Value;
 
             //# init. int array
             int[] datas = InitIntArray(100);
 
             // draw datas first
-            DrawDatas(datas, g, Pens.Blue);
+            DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            BubbleSort(datas, g, Pens.Cyan, this);
+            BubbleSort(datas, _g, Pens.Cyan, this);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //# 設定座標系統
-            Graphics g = SubPreapreSorting(panel1);
+            //# prepare resource
+            _g = SubPreapreSorting(panel1); // 設定座標系統
+            _pen = Pens.Cyan;
+            _sleepTimespan = (int)this.numSleepTimespan.Value;
 
             //# init. int array
             int[] datas = InitIntArray(100);
 
             // draw datas first
-            DrawDatas(datas, g, Pens.Blue);
+            DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            SelectionSort(datas, g, Pens.Cyan, this);
+            SelectionSort(datas, _g, Pens.Cyan, this);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //# 設定座標系統
-            Graphics g = SubPreapreSorting(panel1);
+            //# prepare resource
+            _g = SubPreapreSorting(panel1); // 設定座標系統
+            _pen = Pens.Cyan;
+            _sleepTimespan = (int)this.numSleepTimespan.Value;
 
             //# init. int array
             int[] datas = InitIntArray(100);
 
             // draw datas first
-            DrawDatas(datas, g, Pens.Blue);
+            DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            QuickSort(datas, 0, 99, g, Pens.Cyan, this);
+            QuickSort(datas, 0, 99, _g, Pens.Cyan, this);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //# prepare resource
+            _g = SubPreapreSorting(panel1); // 設定座標系統
+            _pen = Pens.Cyan;
+            _sleepTimespan = (int)this.numSleepTimespan.Value;
+            
+            //# init. int array
+            int[] datas = InitIntArray(100);
+
+            // draw datas first
+            DrawDatas(datas, Pens.Blue);
+
+            // sort -------------------
+            MergeSort(datas);
+
+            //DrawDatas(datas, Pens.Cyan);
         }
 
 
