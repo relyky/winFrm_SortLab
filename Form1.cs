@@ -74,51 +74,31 @@ namespace winFrm_SortLab
         //    datas[j] = tmp;
         //}
 
-        static protected void Swap(int[] datas, int i, int j, Graphics g, Pen pen, Form1 mainForm)
+        static protected void Swap(int[] datas, int i, int j)
         {
             // before swap
-            g.DrawLine(Pens.LightGray, i, 99, i, 0);
-            g.DrawLine(Pens.LightGray, j, 99, j, 0);
-            //g.DrawRectangle(Pens.LightGray, i, datas[i], 1, 1);
-            //g.DrawRectangle(Pens.LightGray, j, datas[j], 1, 1);
+            _g.DrawLine(Pens.LightGray, i, 99, i, 0);
+            _g.DrawLine(Pens.LightGray, j, 99, j, 0);
 
             // swap
             int tmp = datas[i];
             datas[i] = datas[j];
             datas[j] = tmp;
 
-            //DrawDatas(datas, g, pen);
-            g.DrawLine(pen, i, datas[i], i, 0);
-            g.DrawLine(pen, j, datas[j], j, 0);
-            //g.DrawRectangle(pen, i, datas[i], 1, 1);
-            //g.DrawRectangle(pen, j, datas[j], 1, 1);
+            // Draw Data
+            _g.DrawLine(_pen, i, datas[i], i, 0);
+            _g.DrawLine(_pen, j, datas[j], j, 0);
 
             // wait a short time
-            System.Threading.Thread.Sleep((int)mainForm.numSleepTimespan.Value);
+            Thread.Sleep(_sleepTimespan);
         }
-
-        //static protected void DrawDatas(int[] datas, Graphics g, Pen pen)
-        //{
-        //    //Bitmap bmp = new Bitmap(200, 200, g);
-        //
-        //    // draw
-        //    //g.DrawRectangle(0, 0, 100, 100);
-        //    g.FillRectangle(Brushes.LightGray, 0, 0, 100, 100);
-        //    for (int i = 0; i < 100; i++)
-        //        g.DrawLine(pen, i, datas[i], i, 0);
-        //        //g.DrawRectangle(pen, i, datas[i], 1, 1);               
-        //}
 
         static protected void DrawDatas(int[] datas, Pen pen)
         {
-            //Bitmap bmp = new Bitmap(200, 200, g);
-
             // draw
-            //g.DrawRectangle(0, 0, 100, 100);
             _g.FillRectangle(Brushes.LightGray, 0, 0, 100, 100);
             for (int i = 0; i < 100; i++)
-                _g.DrawLine(pen, i, datas[i], i, 0);
-            //g.DrawRectangle(pen, i, datas[i], 1, 1);               
+                _g.DrawLine(pen, i, datas[i], i, 0);               
         }
 
         static protected void DrawDatas(int[] datas)
@@ -127,7 +107,7 @@ namespace winFrm_SortLab
         }
 
         // 插入排序法
-        static protected void InsertionSort(int[] datas, Graphics g, Pen pen, Form1 mainForm)
+        static protected void InsertionSort(int[] datas)
         {
             //從未排序數列取出一元素。
             //由後往前和已排序數列元素比較，直到遇到不大於自己的元素並插入此元素之後；若都沒有則插入在最前面。
@@ -138,8 +118,7 @@ namespace winFrm_SortLab
             {
                 // 取出
                 int c = datas[i];
-                g.DrawLine(Pens.LightGray, i, 99, i, 0);
-                //g.DrawRectangle(Pens.LightGray, i, datas[i], 1, 1);
+                _g.DrawLine(Pens.LightGray, i, 99, i, 0);
 
                 // 比較
                 int insertIndex = i;
@@ -148,40 +127,34 @@ namespace winFrm_SortLab
                 // 插入-shift
                 for (int j = i; j > insertIndex; j--)
                 {
-                    g.DrawLine(Pens.LightGray, j-1, 99, j-1, 0);
-                    //g.DrawRectangle(Pens.LightGray, j-1, sortedDatas[j-1], 1, 1);
+                    _g.DrawLine(Pens.LightGray, j-1, 99, j-1, 0);
                     sortedDatas[j] = sortedDatas[j - 1]; //
-                    g.DrawLine(pen, j, sortedDatas[j], j, 0);
-                    //g.DrawRectangle(Pens.Cyan, j, sortedDatas[j], 1, 1);
+                    _g.DrawLine(_pen, j, sortedDatas[j], j, 0);
 
                     // wait a short time
-                    System.Threading.Thread.Sleep((int)mainForm.numSleepTimespan.Value);
+                    Thread.Sleep(_sleepTimespan);
                 }
 
                 // 插入-new
                 sortedDatas[insertIndex] = c;
-                g.DrawLine(Pens.Green, insertIndex, sortedDatas[insertIndex], insertIndex, 0);
-                //g.DrawRectangle(Pens.Green, insertIndex, sortedDatas[insertIndex], 1, 1);
+                _g.DrawLine(Pens.Green, insertIndex, sortedDatas[insertIndex], insertIndex, 0);
             }
-
-            // 
-            //DrawDatas(sortedDatas, g, Pens.Pink);
         }
 
         // 泡沫排序法
-        static protected void BubbleSort(int[] datas, Graphics g, Pen pen, Form1 mainForm)
+        static protected void BubbleSort(int[] datas)
         {
             for (int i = 0; i < datas.Length - 1; i++)
                 for (int j = i + 1; j < datas.Length; j++)
                     if (datas[i] > datas[j]) // compare
                     {
                         // swap
-                        Swap(datas, i, j, g, pen, mainForm);
+                        Swap(datas, i, j);
                     }
         }
 
         // 選擇排序法
-        static protected void SelectionSort(int[] datas, Graphics g, Pen pen, Form1 mainForm)
+        static protected void SelectionSort(int[] datas)
         {
             //Function selectionSort(Type data[1..n])
             //    Index i, j, max  --- or min
@@ -204,12 +177,12 @@ namespace winFrm_SortLab
                         minIndex = j;
 
                 //# Exchange data[i] and data[max]
-                Swap(datas, i, minIndex, g, pen, mainForm);
+                Swap(datas, i, minIndex);
             }
         }
 
         // 快速排序法
-        static protected void QuickSort(int[] datas, int p, int r, Graphics g, Pen pen, Form1 mainForm)
+        static protected void QuickSort(int[] datas, int p, int r)
         {
             //Function QuickSort(A, p, r)
             //    IF p < r Then
@@ -220,13 +193,13 @@ namespace winFrm_SortLab
 
             if (p < r)
             {
-                int q = QuickSortPartition(datas, p, r, g, pen, mainForm);
-                QuickSort(datas, p, q - 1, g, pen, mainForm);
-                QuickSort(datas, q + 1, r, g, pen, mainForm);
+                int q = QuickSortPartition(datas, p, r);
+                QuickSort(datas, p, q - 1);
+                QuickSort(datas, q + 1, r);
             }
         }
 
-        static protected int QuickSortPartition(int[] datas, int p, int r, Graphics g, Pen pen, Form1 mainForm)
+        static protected int QuickSortPartition(int[] datas, int p, int r)
         {
             // Partition subarray A[p..r] by the following procedure:
             //1   x <- A[r]
@@ -245,11 +218,11 @@ namespace winFrm_SortLab
                 {
                     i++; // i = i + 1;
                     // exchange A[i]<->A[j]
-                    Swap(datas, i, j, g, pen, mainForm);
+                    Swap(datas, i, j);
                 }
 
             // exchange A[i +1] <-> A[r]
-            Swap(datas, i+1, r, g, pen, mainForm);
+            Swap(datas, i+1, r);
             return i + 1;
         }
 
@@ -368,48 +341,6 @@ namespace winFrm_SortLab
         public Form1()
         {
             InitializeComponent();
-
-            //Graphics g = this.CreateGraphics();
-            //Pen myPen = new Pen(Color.Black, 1);
-            //Point sp = new Point(0, 0);//starting point sp
-            //Point ep = new Point(5, 5);//ending point ep
-
-            //g = this.CreateGraphics();//tells compiler that we are going to draw on this very form
-            //g.DrawLine(myPen, sp, ep);
-
-            //g.DrawEllipse(myPen, 20, 30, 90, 30);
-
-            //..................................
-            //// draw 2D dot array
-            //for (int x = 100; x < 520; x += 10)
-            //    for (int y = 100; y < 520; y += 10)
-            //        e.Graphics.DrawRectangle(Pens.Black, x, y, 1,1);
-
-
-            ////# 設定座標系統
-            ////Graphics g = e.Graphics;
-            //Graphics g = panel1.CreateGraphics();
-            //g.TranslateTransform(30, panel1.Height - 30); // 變更原點
-            //g.ScaleTransform(1.0f, -1.0f); // 變更方向
-            //// 
-            //g.DrawLine(Pens.Black, -30, 0, panel1.Width, 0);
-            //g.DrawLine(Pens.Black, 0, -30, 0, panel1.Height);
-
-            //// draw dot array
-            //Point[] dots = new Point[100];
-            //for (int i = 0; i < 100; i++)
-            //    dots[i] = new Point( 5 * i, 5 * i);
-
-            //foreach (Point dot in dots)
-            //    g.DrawRectangle(Pens.Blue, dot.X, dot.Y, 1, 1);
-
-            //// 變更座標系統
-            ////g.PageUnit = GraphicsUnit.Pixel;
-            ////g.PageScale = -1;
-            ////g.ScaleTransform(1F, -1F);
-
-            //foreach (Point dot in dots)
-            //    g.DrawRectangle(Pens.Red, dot.X, dot.Y, 1, 1);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -426,7 +357,7 @@ namespace winFrm_SortLab
             DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            InsertionSort(datas, _g, Pens.Cyan, this);
+            InsertionSort(datas);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -443,7 +374,7 @@ namespace winFrm_SortLab
             DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            BubbleSort(datas, _g, Pens.Cyan, this);
+            BubbleSort(datas);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -460,7 +391,7 @@ namespace winFrm_SortLab
             DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            SelectionSort(datas, _g, Pens.Cyan, this);
+            SelectionSort(datas);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -477,7 +408,7 @@ namespace winFrm_SortLab
             DrawDatas(datas, Pens.Blue);
 
             // sort -------------------
-            QuickSort(datas, 0, 99, _g, Pens.Cyan, this);
+            QuickSort(datas, 0, 99);
         }
 
         private void button5_Click(object sender, EventArgs e)
