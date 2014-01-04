@@ -16,3 +16,5 @@ F:\winFrm_SortLab\obj\x86\Debug\winFrm_SortLab.Form1.resources
 F:\winFrm_SortLab\obj\x86\Debug\winFrm_SortLab.Properties.Resources.resources
 F:\winFrm_SortLab\obj\x86\Debug\GenerateResource.read.1.tlog
 F:\winFrm_SortLab\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\winFrm_SortLab\bin\Debug\AspectW.dll
+F:\winFrm_SortLab\bin\Debug\AspectW.pdb
