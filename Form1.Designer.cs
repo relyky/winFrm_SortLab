@@ -53,6 +53,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numSleepTimespan)).BeginInit();
             this.grpSorting.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +92,7 @@
             // lblCompare
             // 
             this.lblCompare.AutoSize = true;
-            this.lblCompare.Location = new System.Drawing.Point(485, 331);
+            this.lblCompare.Location = new System.Drawing.Point(485, 328);
             this.lblCompare.Name = "lblCompare";
             this.lblCompare.Size = new System.Drawing.Size(101, 12);
             this.lblCompare.TabIndex = 6;
@@ -99,7 +101,7 @@
             // lblExchange
             // 
             this.lblExchange.AutoSize = true;
-            this.lblExchange.Location = new System.Drawing.Point(485, 354);
+            this.lblExchange.Location = new System.Drawing.Point(485, 348);
             this.lblExchange.Name = "lblExchange";
             this.lblExchange.Size = new System.Drawing.Size(101, 12);
             this.lblExchange.TabIndex = 7;
@@ -257,7 +259,7 @@
             // lblUpdate
             // 
             this.lblUpdate.AutoSize = true;
-            this.lblUpdate.Location = new System.Drawing.Point(485, 377);
+            this.lblUpdate.Location = new System.Drawing.Point(485, 368);
             this.lblUpdate.Name = "lblUpdate";
             this.lblUpdate.Size = new System.Drawing.Size(101, 12);
             this.lblUpdate.TabIndex = 14;
@@ -266,7 +268,7 @@
             // lblCounting
             // 
             this.lblCounting.AutoSize = true;
-            this.lblCounting.Location = new System.Drawing.Point(485, 400);
+            this.lblCounting.Location = new System.Drawing.Point(485, 388);
             this.lblCounting.Name = "lblCounting";
             this.lblCounting.Size = new System.Drawing.Size(101, 12);
             this.lblCounting.TabIndex = 15;
@@ -282,7 +284,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Maroon;
-            this.label2.Location = new System.Drawing.Point(473, 440);
+            this.label2.Location = new System.Drawing.Point(473, 449);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 12);
             this.label2.TabIndex = 16;
@@ -292,17 +294,38 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Maroon;
-            this.label3.Location = new System.Drawing.Point(473, 421);
+            this.label3.Location = new System.Drawing.Point(473, 431);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 12);
             this.label3.TabIndex = 17;
             this.label3.Text = "※重點在資料搬移過程。";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(485, 408);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(101, 12);
+            this.lblTotal.TabIndex = 18;
+            this.lblTotal.Text = "次數總計：？？？";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Maroon;
+            this.label4.Location = new System.Drawing.Point(473, 467);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(137, 12);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "※實際花費時間不精準。";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(614, 495);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCounting);
@@ -354,6 +377,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label label4;
     }
 }
 

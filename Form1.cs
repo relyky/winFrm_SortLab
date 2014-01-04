@@ -43,6 +43,8 @@ namespace winFrm_SortLab
             frm1.lblUpdate.Update();
             frm1.lblCounting.Text = "索引計算：？？？";
             frm1.lblCounting.Update();
+            frm1.lblTotal.Text = "次數總計：？？？";
+            frm1.lblTotal.Update();
         }
 
         static public void ShowCount(Form1 frm1)
@@ -52,12 +54,8 @@ namespace winFrm_SortLab
             frm1.lblExchange.Text = string.Format("交換：{0:N0}", AValueEx._exchangeCount);
             frm1.lblUpdate.Text = string.Format("移動：{0:N0}", AValueEx._updateCount);
             frm1.lblCounting.Text = string.Format("索引：{0:N0}", AValueEx._countingCount);
-
-            //// shew immediately
-            //frm1.lblCompare.Update(); // Invalidate();
-            //frm1.lblExchange.Invalidate();
-            //frm1.lblUpdate.Invalidate();
-            //frm1.lblCounting.Invalidate();
+            uint total = AValueEx._compareCount + AValueEx._exchangeCount + AValueEx._updateCount + AValueEx._countingCount;
+            frm1.lblTotal.Text = string.Format("總計：{0:N0}", total);
         }
 
         /// <summary>
@@ -1500,16 +1498,20 @@ namespace winFrm_SortLab
             AValue x = datas[r];
             int i = p - 1;
             for (int j = p; j < r; j++)
-                if (datas[j] <= x)
+                if (datas[j] < x)
                 {
-                    i++; // i = i + 1;
+                    // i = i + 1;
+                    i++;
                     // exchange A[i]<->A[j]
                     Exchange(datas, i, j);
                 }
 
-            // exchange A[i +1] <-> A[r]
-            Exchange(datas, i + 1, r);
-            return i + 1;
+            // exchange A[i+1] <-> A[r]
+            i++;
+            if(i != r) 
+                Exchange(datas, i, r);
+
+            return i;
         }
 
         public static void QuickSortRand(AValue[] datas, int p, int r)
