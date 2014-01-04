@@ -1,5 +1,4 @@
 winFrm_SortLab
 ==============
-
-Sorting With Visual Presentation
-排序以視學化展示
+Sorting Visualization.
+排序視覺化展示。讓排序過程看得見。
