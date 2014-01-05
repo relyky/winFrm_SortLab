@@ -272,7 +272,7 @@
             this.lblCounting.Name = "lblCounting";
             this.lblCounting.Size = new System.Drawing.Size(101, 12);
             this.lblCounting.TabIndex = 15;
-            this.lblCounting.Text = "索引計算：？？？";
+            this.lblCounting.Text = "定址計算：？？？";
             // 
             // timer1
             // 

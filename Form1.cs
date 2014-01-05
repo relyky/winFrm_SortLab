@@ -41,7 +41,7 @@ namespace winFrm_SortLab
             frm1.lblExchange.Update();
             frm1.lblUpdate.Text = "移動次數：？？？";
             frm1.lblUpdate.Update();
-            frm1.lblCounting.Text = "索引計算：？？？";
+            frm1.lblCounting.Text = "定址計算：？？？";
             frm1.lblCounting.Update();
             frm1.lblTotal.Text = "次數總計：？？？";
             frm1.lblTotal.Update();
@@ -53,7 +53,7 @@ namespace winFrm_SortLab
             frm1.lblCompare.Text = string.Format("比較：{0:N0}", AValueEx._compareCount);
             frm1.lblExchange.Text = string.Format("交換：{0:N0}", AValueEx._exchangeCount);
             frm1.lblUpdate.Text = string.Format("移動：{0:N0}", AValueEx._updateCount);
-            frm1.lblCounting.Text = string.Format("索引：{0:N0}", AValueEx._countingCount);
+            frm1.lblCounting.Text = string.Format("定址：{0:N0}", AValueEx._countingCount);
             uint total = AValueEx._compareCount + AValueEx._exchangeCount + AValueEx._updateCount + AValueEx._countingCount;
             frm1.lblTotal.Text = string.Format("總計：{0:N0}", total);
         }
