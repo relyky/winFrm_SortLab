@@ -41,7 +41,7 @@ namespace winFrm_SortLab
             frm1.lblExchange.Update();
             frm1.lblUpdate.Text = "移動次數：？？？";
             frm1.lblUpdate.Update();
-            frm1.lblCounting.Text = "索引計算：？？？";
+            frm1.lblCounting.Text = "定址計算：？？？";
             frm1.lblCounting.Update();
             frm1.lblTotal.Text = "次數總計：？？？";
             frm1.lblTotal.Update();
@@ -53,7 +53,7 @@ namespace winFrm_SortLab
             frm1.lblCompare.Text = string.Format("比較：{0:N0}", AValueEx._compareCount);
             frm1.lblExchange.Text = string.Format("交換：{0:N0}", AValueEx._exchangeCount);
             frm1.lblUpdate.Text = string.Format("移動：{0:N0}", AValueEx._updateCount);
-            frm1.lblCounting.Text = string.Format("索引：{0:N0}", AValueEx._countingCount);
+            frm1.lblCounting.Text = string.Format("定址：{0:N0}", AValueEx._countingCount);
             uint total = AValueEx._compareCount + AValueEx._exchangeCount + AValueEx._updateCount + AValueEx._countingCount;
             frm1.lblTotal.Text = string.Format("總計：{0:N0}", total);
         }
@@ -902,7 +902,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.BubbleSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.BubbleSort(A));
+                    else
+                        AValueEx.BubbleSort(A);
                 });
         }
 
@@ -927,8 +930,11 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.SelectionSort(A);
-                });
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.SelectionSort(A));
+                    else
+                        AValueEx.SelectionSort(A);
+                 });
         }
 
         private void btnInsertionSort_Click(object sender, EventArgs e)
@@ -952,7 +958,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.InsertionSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.InsertionSort(A));
+                    else
+                        AValueEx.InsertionSort(A);
                 });
         }
 
@@ -977,7 +986,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.TopDownMergeSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.TopDownMergeSort(A));
+                    else
+                        AValueEx.TopDownMergeSort(A);
                 });
         }
 
@@ -1002,7 +1014,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.BottomUpMergeSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.BottomUpMergeSort(A));
+                    else
+                        AValueEx.BottomUpMergeSort(A);
                 });
         }
 
@@ -1028,7 +1043,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.QuickSort(A, 0, A.Length -1);                
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.QuickSort(A, 0, A.Length - 1));
+                    else
+                        AValueEx.QuickSort(A, 0, A.Length - 1);                
                 });
         }
 
@@ -1053,7 +1071,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.QuickSortRand(A, 0, A.Length - 1);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.QuickSortRand(A, 0, A.Length - 1));
+                    else
+                        AValueEx.QuickSortRand(A, 0, A.Length - 1); 
                 });
         }
 
@@ -1078,7 +1099,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.HeapSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.HeapSort(A));
+                    else
+                        AValueEx.HeapSort(A);
                 });
         }
 
@@ -1103,7 +1127,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.CountingSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.CountingSort(A));
+                    else
+                        AValueEx.CountingSort(A);
                 });
         }
 
@@ -1128,7 +1155,10 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    AValueEx.RadixSort(A);
+                    if (chkAsyncMode.Checked)
+                        ThreadPool.QueueUserWorkItem(callback => AValueEx.RadixSort(A));
+                    else
+                        AValueEx.RadixSort(A);
                 });
         }
 
