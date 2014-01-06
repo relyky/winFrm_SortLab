@@ -9,6 +9,8 @@ D:\MyPractices\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.exe
 D:\MyPractices\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.pdb
 F:\winFrm_SortLab\bin\Release\winFrm_SortLab.exe
 F:\winFrm_SortLab\bin\Release\winFrm_SortLab.pdb
+F:\winFrm_SortLab\bin\Release\AspectW.dll
+F:\winFrm_SortLab\bin\Release\AspectW.pdb
 F:\winFrm_SortLab\obj\x86\Release\ResolveAssemblyReference.cache
 F:\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.Form1.resources
 F:\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.Properties.Resources.resources
@@ -16,5 +18,3 @@ F:\winFrm_SortLab\obj\x86\Release\GenerateResource.read.1.tlog
 F:\winFrm_SortLab\obj\x86\Release\GenerateResource.write.1.tlog
 F:\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.exe
 F:\winFrm_SortLab\obj\x86\Release\winFrm_SortLab.pdb
-F:\winFrm_SortLab\bin\Release\AspectW.dll
-F:\winFrm_SortLab\bin\Release\AspectW.pdb
