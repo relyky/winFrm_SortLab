@@ -828,9 +828,6 @@ namespace winFrm_SortLab
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = this.Text + " - v" + Application.ProductVersion;
-
-            // 提高權重以免計算中途被作業系統送到後端。
-            Thread.CurrentThread.Priority = ThreadPriority.Highest;
         }
 
         private void btnGenRand_Click(object sender, EventArgs e)
@@ -902,10 +899,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.BubbleSort(A));
-                    else
-                        AValueEx.BubbleSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.BubbleSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -930,10 +926,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.SelectionSort(A));
-                    else
-                        AValueEx.SelectionSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.SelectionSort(A); wait.Set(); });
+                    wait.WaitOne();
                  });
         }
 
@@ -958,10 +953,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.InsertionSort(A));
-                    else
-                        AValueEx.InsertionSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.InsertionSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -986,10 +980,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.TopDownMergeSort(A));
-                    else
-                        AValueEx.TopDownMergeSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.TopDownMergeSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -1014,10 +1007,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.BottomUpMergeSort(A));
-                    else
-                        AValueEx.BottomUpMergeSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.BottomUpMergeSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -1043,10 +1035,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.QuickSort(A, 0, A.Length - 1));
-                    else
-                        AValueEx.QuickSort(A, 0, A.Length - 1);                
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.QuickSort(A, 0, A.Length-1); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -1071,10 +1062,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.QuickSortRand(A, 0, A.Length - 1));
-                    else
-                        AValueEx.QuickSortRand(A, 0, A.Length - 1); 
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.QuickSortRand(A, 0, A.Length-1); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -1099,10 +1089,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.HeapSort(A));
-                    else
-                        AValueEx.HeapSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.HeapSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -1127,10 +1116,9 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.CountingSort(A));
-                    else
-                        AValueEx.CountingSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.CountingSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
@@ -1155,17 +1143,15 @@ namespace winFrm_SortLab
                     Thread.Sleep(1000); // wait one second use to view source data state.
 
                     //# sorting ============
-                    if (chkAsyncMode.Checked)
-                        ThreadPool.QueueUserWorkItem(callback => AValueEx.RadixSort(A));
-                    else
-                        AValueEx.RadixSort(A);
+                    AutoResetEvent wait = new AutoResetEvent(false);
+                    ThreadPool.QueueUserWorkItem(callback => { AValueEx.RadixSort(A); wait.Set(); });
+                    wait.WaitOne();
                 });
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            // 不讓計算中途被作業系統送到後端。(或許有效吧^.^)
-            this.Invalidate();
+
         }
 
     }

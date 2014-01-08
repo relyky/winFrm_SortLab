@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.numSleepTimespan = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,13 +49,10 @@
             this.btnBubbleSort = new System.Windows.Forms.Button();
             this.lblUpdate = new System.Windows.Forms.Label();
             this.lblCounting = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.chkAsyncMode = new System.Windows.Forms.CheckBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numSleepTimespan)).BeginInit();
             this.grpSorting.SuspendLayout();
             this.SuspendLayout();
@@ -64,10 +60,11 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(12, 51);
+            this.panel1.Location = new System.Drawing.Point(8, 38);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(449, 446);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // numSleepTimespan
             // 
@@ -276,12 +273,6 @@
             this.lblCounting.TabIndex = 15;
             this.lblCounting.Text = "定址計算：？？？";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -321,23 +312,11 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "※實際花費時間不精準。";
             // 
-            // chkAsyncMode
-            // 
-            this.chkAsyncMode.AutoSize = true;
-            this.chkAsyncMode.Location = new System.Drawing.Point(59, 32);
-            this.chkAsyncMode.Name = "chkAsyncMode";
-            this.chkAsyncMode.Size = new System.Drawing.Size(84, 16);
-            this.chkAsyncMode.TabIndex = 0;
-            this.chkAsyncMode.Text = "非同步模式";
-            this.toolTip1.SetToolTip(this.chkAsyncMode, "當會變成「無法回應」狀態時再啟用。");
-            this.chkAsyncMode.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 502);
-            this.Controls.Add(this.chkAsyncMode);
+            this.ClientSize = new System.Drawing.Size(614, 492);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label3);
@@ -388,13 +367,10 @@
         private System.Windows.Forms.Button btnCountingSortV;
         private System.Windows.Forms.Button btnRadixSortV;
         private System.Windows.Forms.Label lblCounting;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox chkAsyncMode;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
